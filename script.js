@@ -69,6 +69,7 @@ const title = document.querySelector("#projectTitle");
 const meta = document.querySelector("#projectMeta");
 const summary = document.querySelector("#projectSummary");
 const details = document.querySelector("#projectDetails");
+const parallaxItems = document.querySelectorAll(".hero-media, .metric, .gallery-tile");
 
 window.addEventListener("pointermove", (event) => {
   root.style.setProperty("--x", `${event.clientX}px`);
@@ -86,6 +87,20 @@ const observer = new IntersectionObserver(
 );
 
 document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+
+window.addEventListener(
+  "scroll",
+  () => {
+    const scrollY = window.scrollY;
+    root.style.setProperty("--scroll", `${scrollY * 0.04}px`);
+
+    parallaxItems.forEach((item, index) => {
+      const speed = index % 2 === 0 ? 0.018 : -0.012;
+      item.style.setProperty("--lift", `${scrollY * speed}px`);
+    });
+  },
+  { passive: true }
+);
 
 document.querySelectorAll("[data-project]").forEach((button) => {
   button.addEventListener("click", () => {
