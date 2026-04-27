@@ -26,6 +26,18 @@ Put build photos, CAD screenshots, testing images, and motorsport images in:
 
 Then replace the placeholder gallery tiles in `index.html` with `<img>` elements.
 
+## Edit Project Pages
+
+Each selected technical project now has its own page in:
+
+`projects`
+
+Project-specific images and graphs can go in:
+
+`assets/projects`
+
+Each project page has media placeholders under Role, Engineering, Validation, and Impact.
+
 ## Add Recommendation Letters
 
 Put letter PDFs in:
