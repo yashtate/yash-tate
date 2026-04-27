@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yash J. Tate | Motorsport Engineering Portfolio</title>
+  <meta name="description" content="Portfolio of Yash J. Tate, mechanical engineering student at UT Austin focused on Baja SAE, motorsport, powertrain design, robotics, and advanced manufacturing." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <header class="nav">
+    <a class="brand" href="#home">YJT</a>
+    <nav>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#recommendations">Letters</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button id="themeToggle" aria-label="Toggle color theme">◐</button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Motorsport · Mechanical Design · Advanced Manufacturing</p>
+        <h1 id="name"></h1>
+        <h2 id="title"></h2>
+        <p id="intro" class="intro"></p>
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">View projects</a>
+          <a class="button ghost" id="resumeLink" href="#" target="_blank">Download resume</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <img id="heroImage" src="" alt="Portfolio hero image placeholder" />
+          <div class="hero-caption">
+            <span>Hero image slot</span>
+            <strong>Add Baja, shop, or track photo in /assets</strong>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="marquee" aria-label="skills marquee">
+      <div class="marquee-track" id="skillMarquee"></div>
+    </section>
+
+    <section class="stats" id="stats"></section>
+
+    <section class="section split">
+      <div>
+        <p class="eyebrow">University</p>
+        <h2>Built at UT Austin. Tuned for automotive and motorsport.</h2>
+      </div>
+      <div class="panel" id="education"></div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="section-heading">
+        <p class="eyebrow">Selected technical work</p>
+        <h2>Projects</h2>
+      </div>
+      <div class="project-grid" id="projectGrid"></div>
+    </section>
+
+    <section class="section split" id="experience">
+      <div>
+        <p class="eyebrow">Experience</p>
+        <h2>Leadership, research, and hands-on engineering.</h2>
+      </div>
+      <div class="timeline" id="experienceList"></div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Toolbox</p>
+        <h2>Skills</h2>
+      </div>
+      <div class="skills" id="skills"></div>
+    </section>
+
+    <section class="section" id="recommendations">
+      <div class="section-heading">
+        <p class="eyebrow">References</p>
+        <h2>Recommendation letters</h2>
+      </div>
+      <div class="cards" id="recommendationsList"></div>
+    </section>
+
+    <section class="section" id="gallery">
+      <div class="section-heading">
+        <p class="eyebrow">Build log</p>
+        <h2>Gallery</h2>
+      </div>
+      <div class="gallery" id="galleryGrid"></div>
+    </section>
+
+    <section class="contact" id="contact">
+      <p class="eyebrow">Get in touch</p>
+      <h2>Let’s talk powertrains, manufacturing, and race cars.</h2>
+      <div class="contact-links">
+        <a id="emailLink" href="#">Email</a>
+        <a id="linkedinLink" href="#" target="_blank">LinkedIn</a>
+        <a id="githubLink" href="#" target="_blank">GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Yash J. Tate</span>
+    <span>Mechanical Engineering · UT Austin</span>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
