@@ -1,35 +1,24 @@
 const $ = (selector) => document.querySelector(selector);
 
-function setText(selector, text) {
-  const el = $(selector);
-  if (el) el.textContent = text;
-}
-
-function imageWithFallback(src, alt) {
-  return `<img src="${src}" alt="${alt}" onerror="this.style.opacity=.25; this.alt='Add image: ${src}'" />`;
+function img(src, alt) {
+  return `<img src="${src}" alt="${alt}" onerror="this.style.opacity=.18; this.alt='Add image: ${src}'" />`;
 }
 
 function render() {
   const d = portfolioData;
-
-  setText("#name", d.name);
-  setText("#title", d.title);
-  setText("#intro", d.intro);
+  $("#name").textContent = d.name;
+  $("#heroImage").src = d.heroImage;
   $("#resumeLink").href = d.resume;
-  $("#heroImage").src = d.heroImages[0];
   $("#emailLink").href = `mailto:${d.email}`;
   $("#linkedinLink").href = d.linkedin;
   $("#githubLink").href = d.github;
-  setText("#year", new Date().getFullYear());
+  $("#year").textContent = new Date().getFullYear();
 
-  const marqueeItems = [...d.skills, ...d.skills];
-  $("#skillMarquee").innerHTML = marqueeItems.map(skill => `<span>${skill}</span>`).join("");
+  const marquee = [...d.skills, ...d.skills];
+  $("#skillMarquee").innerHTML = marquee.map(s => `<span>${s}</span>`).join("");
 
-  $("#stats").innerHTML = d.stats.map(stat => `
-    <article class="stat">
-      <strong>${stat.value}</strong>
-      <span>${stat.label}</span>
-    </article>
+  $("#quickStats").innerHTML = d.stats.map(s => `
+    <article class="stat"><strong>${s.value}</strong><span>${s.label}</span></article>
   `).join("");
 
   $("#education").innerHTML = `
@@ -37,53 +26,76 @@ function render() {
     <p>${d.education.degree}</p>
     <p><strong>Expected graduation:</strong> ${d.education.graduation}</p>
     <p><strong>GPA:</strong> ${d.education.gpa}</p>
-    <p><strong>Relevant coursework:</strong> ${d.education.coursework.join(", ")}</p>
+    <p><strong>Coursework:</strong> ${d.education.coursework.join(", ")}</p>
   `;
 
-  $("#projectGrid").innerHTML = d.projects.map(project => `
-    <article class="project-card">
-      <div class="project-image">${imageWithFallback(project.image, project.title)}</div>
-      <div class="project-content">
-        <div class="project-meta">
-          <span>${project.number} · ${project.category}</span>
-          <span>${project.date}</span>
-        </div>
-        <h3>${project.title}</h3>
-        <p>${project.summary}</p>
-        <div class="tags">${project.highlights.map(item => `<span>${item}</span>`).join("")}</div>
+  $("#projectGrid").innerHTML = d.projects.map((p, i) => `
+    <article class="project-card" data-project="${i}">
+      ${img(p.image, p.title)}
+      <div class="project-body">
+        <div class="project-meta">${p.category}</div>
+        <h3>${p.title}</h3>
+        <p>${p.short}</p>
+        <div class="tags">${p.tags.slice(0,4).map(t => `<span>${t}</span>`).join("")}</div>
+        <div class="open-hint">Open project →</div>
       </div>
     </article>
   `).join("");
 
-  $("#experienceList").innerHTML = d.experience.map(item => `
+  document.querySelectorAll(".project-card").forEach(card => {
+    card.addEventListener("click", () => openProject(d.projects[Number(card.dataset.project)]));
+  });
+
+  $("#experienceList").innerHTML = d.experience.map(e => `
     <article class="timeline-item">
-      <small>${item.time}</small>
-      <h3>${item.role}</h3>
-      <p><strong>${item.org}</strong></p>
-      <p>${item.detail}</p>
+      <small>${e.time}</small>
+      <h3>${e.role}</h3>
+      <p><strong>${e.org}</strong></p>
+      <p>${e.detail}</p>
     </article>
   `).join("");
 
-  $("#skills").innerHTML = d.skills.map(skill => `<span>${skill}</span>`).join("");
+  $("#skills").innerHTML = d.skills.map(s => `<span>${s}</span>`).join("");
 
-  $("#recommendationsList").innerHTML = d.recommendations.map(letter => `
+  $("#recommendationsList").innerHTML = d.recommendations.map(r => `
     <article class="letter-card">
-      <h3>${letter.name}</h3>
-      <p>${letter.description}</p>
-      <a href="${letter.link}" target="_blank">Open letter →</a>
+      <h3>${r.name}</h3>
+      <p>${r.description}</p>
+      <a href="${r.link}" target="_blank">Open letter →</a>
     </article>
   `).join("");
 
-  $("#galleryGrid").innerHTML = d.gallery.map(item => `
-    <article class="gallery-item">
-      ${imageWithFallback(item.image, item.caption)}
-      <p>${item.caption}</p>
-    </article>
+  $("#galleryGrid").innerHTML = d.gallery.map(g => `
+    <article class="gallery-item">${img(g.image, g.caption)}<p>${g.caption}</p></article>
   `).join("");
 }
 
-$("#themeToggle").addEventListener("click", () => {
-  document.body.classList.toggle("light");
+function openProject(project) {
+  const modal = $("#projectModal");
+  $("#modalContent").innerHTML = `
+    <img class="modal-hero" src="${project.image}" alt="${project.title}" onerror="this.style.display='none'" />
+    <div class="modal-inner">
+      <p class="eyebrow">${project.category}</p>
+      <h3>${project.title}</h3>
+      <div class="tags">${project.tags.map(t => `<span>${t}</span>`).join("")}</div>
+      <ul>${project.details.map(d => `<li>${d}</li>`).join("")}</ul>
+    </div>
+  `;
+  modal.showModal();
+}
+
+$(".modal-close").addEventListener("click", () => $("#projectModal").close());
+$("#projectModal").addEventListener("click", (e) => { if (e.target.id === "projectModal") e.target.close(); });
+
+window.addEventListener("mousemove", (e) => {
+  const glow = $(".cursor-glow");
+  glow.style.left = `${e.clientX}px`;
+  glow.style.top = `${e.clientY}px`;
 });
 
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add("visible"); });
+}, { threshold: .12 });
+
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 render();
