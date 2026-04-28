@@ -2,6 +2,16 @@ const root = document.documentElement;
 const glow = document.querySelector(".cursor-glow");
 const parallaxItems = document.querySelectorAll(".hero-media, .metric, .gallery-tile");
 
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+window.addEventListener("load", () => {
+  if (!window.location.hash) {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }
+});
+
 window.addEventListener("pointermove", (event) => {
   root.style.setProperty("--x", `${event.clientX}px`);
   root.style.setProperty("--y", `${event.clientY}px`);
