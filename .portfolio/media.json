@@ -1,0 +1,81 @@
+{
+  "car": {
+    "file": "assets/car-1440.webp",
+    "width": 1440,
+    "height": 960,
+    "alt": "Longhorn Baja Racing car 185 on grass, photographed from the front quarter.",
+    "caption": "Car 185, assembled in its competition configuration.",
+    "small": "assets/car-720.webp"
+  },
+  "hill": {
+    "file": "assets/hill-climb-1365.webp",
+    "width": 1365,
+    "height": 2048,
+    "alt": "Car 185 lifts its front wheels on the hill-climb course.",
+    "caption": "Car 185 on the hill climb at Baja SAE Ohio.",
+    "small": "assets/hill-climb-720.webp"
+  },
+  "rear": {
+    "file": "assets/number-plate-900.webp",
+    "width": 900,
+    "height": 1391,
+    "alt": "Rear of car 185 with the engine and suspension beneath the number plate.",
+    "caption": "Rear frame, engine, and suspension packaging beneath the number plate."
+  },
+  "side": {
+    "file": "assets/side-panel-900.webp",
+    "width": 900,
+    "height": 600,
+    "alt": "Orange riveted side panel, cockpit, and rear suspension.",
+    "caption": "The finished side panel follows the lower frame rail beside the cockpit."
+  },
+  "firewall": {
+    "file": "assets/firewall-900.webp",
+    "width": 900,
+    "height": 1138,
+    "alt": "Aluminum cockpit firewall, harness openings, and car number 185.",
+    "caption": "Cockpit layout with the firewall and shoulder-harness openings visible."
+  },
+  "column": {
+    "file": "assets/column-support-900.webp",
+    "width": 900,
+    "height": 1200,
+    "alt": "Team members holding a frame tube in place next to a digital angle gauge.",
+    "caption": "The team checks the tube angle during fit-up."
+  },
+  "rack-side": {
+    "file": "assets/rack-side-900.webp",
+    "width": 900,
+    "height": 883,
+    "alt": "Steering rack attachment between the front frame tubes in the shop.",
+    "caption": "Steering rack attachment viewed through the front frame."
+  },
+  "rack-front": {
+    "file": "assets/rack-front-900.webp",
+    "width": 900,
+    "height": 675,
+    "alt": "Steering rack and brake lines installed together inside the front frame.",
+    "caption": "The steering rack shares the front bay with the brake plumbing."
+  },
+  "cad": {
+    "file": "baja-cad-2.png",
+    "width": 1172,
+    "height": 825,
+    "alt": "CAD assembly of the rear chassis, drivetrain, and wheel.",
+    "caption": "Vehicle assembly in CAD. The rear frame defines the available envelope for the CVT and drive components."
+  },
+  "ratios": {
+    "file": "baja-cad-1.png",
+    "width": 837,
+    "height": 459,
+    "alt": "Engineering spreadsheet comparing engine, CVT, gearing, and vehicle inputs.",
+    "caption": "Gear-ratio worksheet. Speed and torque values are calculated estimates from the listed inputs."
+  },
+  "thermal": {
+    "file": "baja-validation-1.png",
+    "width": 700,
+    "height": 689,
+    "alt": "Simulation mesh and temperature contours in the CVT housing cross-section.",
+    "caption": "Simulated temperature distribution for the 3 mm wall configuration at high rotational speed."
+  }
+}

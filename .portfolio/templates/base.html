@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#171919">
+  <title>$title</title>
+  <meta name="description" content="$description">
+  <link rel="canonical" href="$canonical">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="$name · Engineering Portfolio">
+  <meta property="og:title" content="$title">
+  <meta property="og:description" content="$description">
+  <meta property="og:url" content="$canonical">
+  <meta property="og:image" content="$socialImage">
+  <meta property="og:image:alt" content="$socialAlt">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/barlow-condensed-bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body id="top" class="$pageClass">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="mast"><div class="wrap mast-inner">
+    <a class="brand" href="index.html" aria-label="$name, homepage"><span class="brand-mark" aria-hidden="true">Y<span>/</span>T</span><span class="brand-type">$name</span></a>
+    <nav class="primary-nav" aria-label="Main navigation">$navigation</nav>
+  </div></header>
+  <main id="main">$body</main>
+  <footer id="contact"><div class="wrap contact-grid">
+    <div><p class="eyebrow">Get in touch</p><h2>Contact</h2></div>
+    <div class="contact-copy"><p>I’m looking for full-time motorsports engineering roles after I graduate in $graduation.</p>
+    <div class="contact-links">$contactLinks</div></div>
+  </div><div class="wrap colophon"><span>$name · Austin, TX</span><a href="#top">Back to top</a></div></footer>
+  $dialog
+</body>
+</html>
