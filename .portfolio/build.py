@@ -17,7 +17,6 @@ MEDIA = json.loads((SOURCE / "media.json").read_text())
 SITE = os.environ.get("SITE_URL", PROFILE["productionUrl"]).rstrip("/") + "/"
 PAGES = []
 LEGACY = {"material-hybrid", "camping-build", "sidi-lab", "combat-robot"}
-DOWNLOAD = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v4h16v-4"/></svg>'
 
 def tpl(template_name, **fields):
     return Template((SOURCE / "templates" / (template_name + ".html")).read_text()).substitute(fields)
@@ -76,9 +75,9 @@ def layout(filename, title, description, body, active="", media="car", lightbox=
     if PROFILE.get("linkedin"):
         contact.append(f'<a href="{escape(PROFILE["linkedin"])}">LinkedIn</a>')
     if PROFILE.get("resume"):
-        pdf = escape(PROFILE["resume"])
-        nav += f'<a class="nav-resume" href="{pdf}">Résumé {DOWNLOAD}</a>'
-        contact.append(f'<a href="{pdf}">Résumé (PDF)</a>')
+        current = ' aria-current="page"' if filename == "resume.html" else ""
+        nav += f'<a class="nav-resume" href="resume.html"{current}>Résumé</a>'
+        contact.append('<a href="resume.html">Résumé</a>')
     dialog = ""
     if lightbox:
         dialog = ('<dialog id="viewer" aria-labelledby="viewer-caption"><div class="viewer-tools">'
@@ -96,12 +95,23 @@ def layout(filename, title, description, body, active="", media="car", lightbox=
 def home(featured):
     p = PROFILE
     skills = "".join(f"<li>{escape(skill)}</li>" for skill in p["skills"])
-    pdf = f'<a class="button outline" href="{escape(p["resume"])}">View Résumé</a>' if p.get("resume") else '<a class="button outline" href="#contact">Contact</a>'
+    pdf = '<a class="button outline" href="resume.html">View Résumé</a>' if p.get("resume") else '<a class="button outline" href="#contact">Contact</a>'
     body = tpl("home", **{k:escape(p[k]) for k in ("name","role","team","education","intro","discipline","internshipTerm","internshipScope")},
                resumeButton=pdf, skills=skills, featured=card(featured), insetPhoto=img("car","(max-width: 700px) 38vw, 16vw"),
                bajaPhoto=img("side"))
     layout("index.html", f'{p["name"]} | {p["role"]} · Mechanical Engineering',
            f'{p["name"]}, {p["role"]} at {p["team"]}. Explore my Baja SAE powertrain design and testing at UT Austin.', body)
+
+def redirect(filename, target, title):
+    url = escape(target)
+    markup = (
+        '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+        '<meta name="color-scheme" content="dark"><meta name="theme-color" content="#0c0a09">'
+        '<style>html,body{background:#0c0a09;color:#e5c6ab}a{color:#f39053}</style>'
+        f'<link rel="stylesheet" href="styles.css"><link rel="canonical" href="{escape(urljoin(SITE, target.split("#")[0]))}">'
+        f'<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url={url}"><title>{escape(title)}</title></head>'
+        f'<body class="redirect-page"><p><a href="{url}">{escape(title)}</a></p></body></html>')
+    (ROOT / filename).write_text(markup)
 
 def project_index(projects):
     studies = "".join(card(p) for p in projects if not p["draft"])
@@ -111,16 +121,12 @@ def project_index(projects):
               f'<ul class="project-rows">{in_progress}</ul></section>') if in_progress else ""
     body = ('<section class="page-intro"><div class="wrap"><p class="eyebrow line">Engineering portfolio</p>'
             '<h1>Engineering projects</h1><p>Design decisions, shop work, and results from the vehicles I’ve worked on.</p></div></section>'
-            f'<div class="paper"><div class="wrap index-list">{studies}{drafts}</div></div>')
+            f'<div class="surface"><div class="wrap index-list">{studies}{drafts}</div></div>')
     layout("projects.html", "Engineering Projects | " + PROFILE["name"],
            "Case studies in Baja SAE powertrain design, drivetrain packaging, assembly, and endurance testing.",body,"Projects")
     for p in projects:
         if p["draft"] and (p["slug"] in LEGACY or (ROOT / (p["slug"] + ".html")).exists()):
-            url = f'projects.html#{p["slug"]}'
-            (ROOT / (p["slug"] + ".html")).write_text(
-                '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-                f'<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url={url}">'
-                f'<title>{escape(p["title"])} | Projects</title></head><body><p><a href="{url}">View project listing</a></p></body></html>')
+            redirect(p["slug"] + ".html", f'projects.html#{p["slug"]}', p["title"] + " | Projects")
 
 def case_study(p):
     parts = re.split(r"^## (.+)$", p["body"], flags=re.MULTILINE)
@@ -138,7 +144,7 @@ def case_study(p):
     body = (f'<section class="page-intro case-intro"><div class="wrap"><a class="crumb" href="projects.html">All engineering projects</a>'
             f'<p class="eyebrow line">{escape(p["category"])}</p><h1>{escape(p["title"])}</h1><p>{escape(p["summary"])}</p>'
             f'<div class="case-meta">{status(p)}<span>{escape(p["role"])}</span></div></div></section>'
-            f'<div class="paper"><div class="wrap case-hero-img">{photo}</div><div class="wrap case-body">'
+            f'<div class="surface"><div class="wrap case-hero-img">{photo}</div><div class="wrap case-body">'
             f'<nav aria-label="Case study sections" class="contents"><p class="eyebrow">In this study</p>{"".join(menu)}</nav>'
             f'<article>{"".join(sections)}<a class="text-link" href="projects.html">Back to projects</a></article></div></div>')
     layout(p["slug"]+".html", p["title"]+" | "+PROFILE["name"], p["summary"], body, media=p["hero"] or "car", lightbox=True)
@@ -148,14 +154,24 @@ def baja():
                shopPhotos="".join(figure(k) for k in ("column","rack-side","rack-front")),
                fieldPhotos="".join(figure(k) for k in ("hill","firewall","side","rear")))
     layout("baja.html","Longhorn Baja Racing | "+PROFILE["name"],
-           "I co-founded Longhorn Baja Racing at UT Austin and led powertrain for car 185. See the team’s shop photos, competition car, and engineering case studies.",
+           "I co-founded Longhorn Baja Racing at UT Austin and led powertrain for car 185. See the team’s shop photos, competition car, and the combined powertrain and gearbox case study.",
            body,"Baja SAE",media="car",lightbox=True)
+
+def resume():
+    p = PROFILE
+    fields = {key: escape(p[key]) for key in ("name","graduation","team","role","internshipTerm","internshipScope","resume")}
+    body = tpl("resume", **fields, skillList="".join(f"<li>{escape(item)}</li>" for item in p["skills"]))
+    layout("resume.html", f'{p["name"]} | Mechanical Engineering Résumé',
+           f'Mechanical engineering education and experience at UT Austin, Longhorn Baja Racing, and MATERIAL Hybrid Manufacturing. {p["role"]} at {p["team"]}.', body)
 
 def main():
     projects = load_projects()
     home(next(p for p in projects if p["featured"] and not p["draft"]))
     project_index(projects)
     baja()
+    if PROFILE.get("resume"):
+        resume()
+    redirect("gearbox-packaging.html", "baja-powertrain.html#gearbox-mount-in-design", "Gearbox mount in design | Baja SAE powertrain")
     for project in projects:
         if not project["draft"]:
             case_study(project)

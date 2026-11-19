@@ -40,3 +40,68 @@ if (viewer && typeof viewer.showModal === "function") {
   });
   viewer.addEventListener("close", () => opener?.focus());
 }
+
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(entries => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("entered");
+        observer.unobserve(entry.target);
+      }
+    }
+  });
+  const revealSections = () => {
+    observer.disconnect();
+    if (reducedMotion.matches) return;
+    const selectors = ".section-title, .project-card, .metrics, .case-body h2, .cv section h2, .field-grid figure";
+    document.querySelectorAll(selectors).forEach(element => {
+      if (!element.classList.contains("entered")) observer.observe(element);
+    });
+  };
+  revealSections();
+  reducedMotion.addEventListener("change", revealSections);
+}
+
+const halo = document.querySelector(".cursor-halo");
+if (halo) {
+  const pointerMode = window.matchMedia("(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) and (forced-colors: none)");
+  let frame = 0;
+  let x = 0, y = 0, interactive = false;
+
+  function paint() {
+    frame = 0;
+    halo.style.transform = `translate3d(${x}px,${y}px,0)`;
+    halo.classList.toggle("over-link", interactive);
+    halo.classList.add("visible");
+  }
+  function clear() {
+    cancelAnimationFrame(frame);
+    frame = 0;
+    halo.classList.remove("visible", "over-link");
+  }
+  function follow(event) {
+    if (event.pointerType !== "mouse") {
+      clear();
+      return;
+    }
+    x = event.clientX;
+    y = event.clientY;
+    interactive = Boolean(event.target.closest?.("a, button, summary"));
+    if (!frame) frame = requestAnimationFrame(paint);
+  }
+  function configurePointer() {
+    if (pointerMode.matches) {
+      window.addEventListener("pointermove", follow, {passive: true});
+      document.documentElement.addEventListener("pointerleave", clear);
+      window.addEventListener("blur", clear);
+    } else {
+      window.removeEventListener("pointermove", follow);
+      document.documentElement.removeEventListener("pointerleave", clear);
+      window.removeEventListener("blur", clear);
+      clear();
+    }
+  }
+  configurePointer();
+  pointerMode.addEventListener("change", configurePointer);
+}
