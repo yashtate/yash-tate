@@ -140,11 +140,11 @@ def home():
         gallery.append(f'<div class="photo-row">{"".join(tiles)}</div>')
     body = tpl("home", **{k:escape(p[k]) for k in ("name","role","team","education","intro","discipline","graduation")},
                resumeButton=pdf, skills=skills, profileLinks="".join(links),
-               portraitPhoto=img("home-aiaa-portrait", "(max-width: 640px) 92vw, (max-width: 900px) 36vw, 384px", eager=True),
+               portraitPhoto=img("home-lbr-portrait", "(max-width: 640px) 92vw, (max-width: 900px) 36vw, 384px", eager=True),
                aboutPhoto=img("home-motogp-crew", "(max-width: 640px) 92vw, 40vw"),
                galleryPhotos="".join(gallery), resumeSection=section)
     layout("index.html", f'{p["name"]} | {p["role"]} · Mechanical Engineering',
-           f'{p["name"]}, {p["role"]} at {p["team"]}. Explore my Baja SAE powertrain design and testing at UT Austin.', body, media="home-aiaa-portrait", lightbox=True)
+           f'{p["name"]}, {p["role"]} at {p["team"]}. Explore my Baja SAE powertrain design and testing at UT Austin.', body, media="home-lbr-portrait", lightbox=True)
 
 def redirect(filename, target, title):
     url = escape(target)

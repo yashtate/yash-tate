@@ -1,4 +1,12 @@
 {
+  "home-lbr-portrait": {
+    "file": "assets/home-lbr-portrait.webp",
+    "width": 1200,
+    "height": 1600,
+    "alt": "Yash Tate wearing a Longhorn Baja Racing shirt in front of orange shop cabinets.",
+    "caption": "Longhorn Baja Racing portrait.",
+    "small": "assets/home-lbr-portrait-720.webp"
+  },
   "home-aiaa-portrait": {
     "file": "assets/home-aiaa-portrait.webp",
     "width": 1350,

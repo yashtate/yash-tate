@@ -49,7 +49,7 @@ def check_home(page, base):
     assert page.locator("#about").bounding_box()["y"] < page.locator("#gallery").bounding_box()["y"] < page.locator("#resume").bounding_box()["y"]
     photos = page.locator(".photo-wall .zoom-photo")
     assert photos.count() == 14
-    assert page.locator(".portrait img").get_attribute("src") == "assets/home-aiaa-portrait.webp"
+    assert page.locator(".portrait img").get_attribute("src") == "assets/home-lbr-portrait.webp"
     assert page.locator("#about .about-photo img").get_attribute("src") == "assets/home-motogp-crew.webp"
     assert page.locator("#gallery figcaption").count() == 0
     photos.first.click()
