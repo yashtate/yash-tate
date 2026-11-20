@@ -29,7 +29,7 @@ The command writes HTML and the sitemap into the repository root. Commit both yo
 
 Set `SITE_URL` when building for a different public address. For example, `SITE_URL=https://example.com/ python3 .portfolio/build.py` updates canonical links, share URLs, and the sitemap together. Page and asset links stay relative for GitHub project Pages.
 
-The homepage features the supplied AIAA portrait, a MotoGP crew photo, and a personal gallery. Edit the profile in `.portfolio/templates/home.html`, the gallery order in `home()`, and the shared captions in `.portfolio/media.json`. The résumé viewer embeds the actual PDF. After replacing it, regenerate its first-page backup at 144 dpi with `pdftoppm -f 1 -l 1 -r 144 -singlefile -png Yash-Tate-Resume.pdf /tmp/yash-resume` and `cwebp -lossless /tmp/yash-resume.png -o assets/resume-page.webp`. Rebuild after editing styles or scripts so the pages reference the new asset versions.
+The homepage groups the supplied personal photos into one gallery. Edit the profile in `.portfolio/templates/home.html`, the gallery order in `home()`, and the shared captions in `.portfolio/media.json`. The résumé viewer embeds the actual PDF. After replacing it, regenerate its first-page backup at 144 dpi with `pdftoppm -f 1 -l 1 -r 144 -singlefile -png Yash-Tate-Resume.pdf /tmp/yash-resume` and `cwebp -lossless /tmp/yash-resume.png -o assets/resume-page.webp`. Rebuild after editing styles or scripts so the pages reference the new asset versions.
 
 ## Fill in another project
 

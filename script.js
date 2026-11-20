@@ -31,7 +31,9 @@ if (viewer && typeof viewer.showModal === "function") {
     const link = links[current];
     photo.src = link.href;
     photo.alt = link.querySelector("img").alt;
-    caption.textContent = link.closest("figure").querySelector("figcaption").textContent;
+    const detail = link.closest("figure")?.querySelector("figcaption");
+    caption.textContent = detail?.textContent ?? photo.alt;
+    caption.hidden = !detail;
   }
   links.forEach((link, index) => {
     link.addEventListener("click", event => {

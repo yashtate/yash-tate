@@ -120,18 +120,27 @@ def home():
         links.append(f'<a href="mailto:{email}">{email}</a>')
     if p.get("linkedin"):
         links.append(f'<a href="{escape(p["linkedin"])}">LinkedIn</a>')
-    photos = (
-        "nascar-paddock", "aviation-exhibit", "texas-game-day",
-        "bmw-m3", "mountain-lake", "motogp-trackside",
-        "bmw-race-car", "el-yunque", "night-with-friends",
-        "fountain-plaza", "forest-overlook", "aircraft-museum",
+    photo_rows = (
+        ("aiaa-portrait", "nascar-paddock", "bmw-m3", "aviation-exhibit", "texas-game-day"),
+        ("motogp-trackside", "fountain-plaza", "bmw-race-car", "night-with-friends", "mountain-lake"),
+        ("motogp-crew", "el-yunque", "aircraft-museum", "forest-overlook"),
     )
-    gallery = "".join(figure(f"home-{photo}", sizes="(max-width: 640px) 46vw, 32vw") for photo in photos)
+    gallery = []
+    for row in photo_rows:
+        tiles = []
+        for photo in row:
+            key = f"home-{photo}"
+            media = MEDIA[key]
+            ratio = media["width"] / media["height"]
+            tiles.append(
+                f'<a class="zoom-photo" href="{media["file"]}" style="--photo-ratio:{ratio:.5f}" '
+                f'aria-label="Enlarge image. {escape(media["alt"])}">'
+                f'{img(key, "(max-width: 640px) 46vw, 35vw")}</a>'
+            )
+        gallery.append(f'<div class="photo-row">{"".join(tiles)}</div>')
     body = tpl("home", **{k:escape(p[k]) for k in ("name","role","team","education","intro","discipline","graduation")},
                resumeButton=pdf, skills=skills, profileLinks="".join(links),
-               portraitPhoto=img("home-aiaa-portrait", "(max-width: 640px) 92vw, 408px", eager=True),
-               aboutPhoto=figure("home-motogp-crew", sizes="(max-width: 640px) 92vw, 32vw"),
-               galleryPhotos=gallery, resumeSection=section)
+               galleryPhotos="".join(gallery), resumeSection=section)
     layout("index.html", f'{p["name"]} | {p["role"]} · Mechanical Engineering',
            f'{p["name"]}, {p["role"]} at {p["team"]}. Explore my Baja SAE powertrain design and testing at UT Austin.', body, media="home-aiaa-portrait", lightbox=True)
 

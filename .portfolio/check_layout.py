@@ -48,11 +48,12 @@ def check_home(page, base):
         assert page.locator(f"section#{anchor}").count() == 1
     assert page.locator("#about").bounding_box()["y"] < page.locator("#gallery").bounding_box()["y"] < page.locator("#resume").bounding_box()["y"]
     photos = page.locator(".photo-wall .zoom-photo")
-    assert photos.count() == 12
-    assert page.locator(".portrait img").get_attribute("src") == "assets/home-aiaa-portrait.webp"
-    assert page.locator("#about figure img").get_attribute("src") == "assets/home-motogp-crew.webp"
+    assert photos.count() == 14
+    assert page.locator('main img[src^="assets/home-"]').count() == photos.count()
+    assert page.locator("#gallery figcaption").count() == 0
     photos.first.click()
     assert page.locator("dialog").is_visible()
+    assert not page.locator("#viewer-caption").is_visible()
     assert page.locator("#viewer-image").get_attribute("src") == urljoin(base, photos.first.get_attribute("href"))
     page.keyboard.press("ArrowRight")
     assert page.locator("#viewer-image").get_attribute("src") == urljoin(base, photos.nth(1).get_attribute("href"))
