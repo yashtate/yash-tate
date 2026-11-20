@@ -24,7 +24,7 @@ The command writes HTML and the sitemap into the repository root. Commit both yo
 | Résumé viewer on the homepage and résumé page | `.portfolio/templates/resume-embed.html` |
 | Résumé document and single-page preview | `Yash-Tate-Resume.pdf` and `assets/resume-page.webp` |
 | Homepage, team story, shared navigation and footer | `.portfolio/templates/`; navigation links are generated in `.portfolio/build.py` |
-| Combined Baja SAE powertrain and gearbox case study and other project placeholders | `.portfolio/projects/*.md` |
+| Baja powertrain, Civic sleeping platform, conformal battery manufacturing, and project drafts | `.portfolio/projects/*.md` |
 | Shared layout and interactions | `styles.css`, `script.js` |
 
 Set `SITE_URL` when building for a different public address. For example, `SITE_URL=https://example.com/ python3 .portfolio/build.py` updates canonical links, share URLs, and the sitemap together. Page and asset links stay relative for GitHub project Pages.
@@ -37,11 +37,11 @@ Open a named Markdown draft in `.portfolio/projects/` or copy `_template.md` to 
 
 Use `{{figure:cad}}` on its own line to insert a captioned, expandable figure from the media catalog. To add an image, put the file in `assets/`, add its entry to the catalog, and use the entry key in the Markdown or `hero` field. Set `featured = true` on exactly one published project. Set `draft = false` and rebuild when a case study is ready.
 
-The index lists draft titles under **Case studies in preparation**. The draft text is excluded from the generated pages. The former gearbox page goes to the mount section in the powertrain case study. The four pre-existing non-Baja project URLs take readers to the corresponding index listing while those projects are drafts. The source repository itself is public, so keep confidential notes and images outside it.
+The index lists draft titles under **Case studies in preparation**. The draft text is excluded from the generated pages. The former gearbox page goes to the mount section in the powertrain case study. The Civic and battery URLs open their full case studies. The SiDi lab and combat robot URLs take readers to their draft titles on the Projects page. The source repository itself is public, so keep confidential notes and images outside it.
 
 ## Content still to supply
 
-- **Other projects** — The go-kart, battery manufacturing, SiDi lab, camping system, and combat robot have individual draft files. Add your contribution, a cleared photo or CAD view, and the design, fabrication, or test evidence you want recruiters to see.
+- **Other projects** — The go-kart, SiDi lab, and combat robot have individual draft files. Add your contribution, a cleared photo or CAD view, and the design, fabrication, or test evidence you want recruiters to see.
 - **Gearbox mount** — Add mount-specific CAD, the selected mount position and clearance, and fit-up or test results when available. The combined case study’s final section identifies the mount as in design and shows the earlier competition vehicle for context.
 - **RLL** — The current entry covers the incoming May–August 2027 appointment and anticipated scope from the supplied résumé. Update the status and add approved accomplishments after the work takes place.
 - **Optional technical detail** — The powertrain page distinguishes simulated results and test observations. If you want to publish more detail, supply the load case, baseline mass, or temperature measurements that support it.

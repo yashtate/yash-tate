@@ -1,36 +1,44 @@
 +++
-title = "Compact Car Solo Camping System"
-category = "Personal build"
-role = ""
-status = ""
-summary = ""
-problem = ""
-hero = ""
-heroCaption = ""
-draft = true
+title = "Honda Civic Sleeping Platform"
+category = "Personal project · Vehicle packaging"
+role = "Design and CAD"
+status = "Concept design"
+summary = "I designed a removable sleeping deck for my 2025 Honda Civic Sport Hybrid. Narrowing the foot end gave me a way to load the deck through the trunk and keep camping gear underneath."
+problem = "Make room for one person to sleep in a sedan with the rear seats folded."
+hero = "civic-deck-layout"
+heroCaption = "The revised deck outline drawn over my Civic’s trunk. The straight sides let the foot end clear the opening."
+draft = false
 featured = false
 +++
 
-## Overview and ownership
+## Measuring the trunk
 
-[What needed to work? Describe your role and identify the people or team you worked with.]
+I started this project after pricing used pickups for solo camping trips. I already owned a Civic, so I folded its rear seats and measured the space from the trunk into the passenger compartment. In the trunk, I measured **40 inches across** near the seat opening and **36 inches deep** from the sill to the folded seats. Those measurements gave me a starting point for the deck and its supports.
 
-## Requirements
+{{figure:civic-trunk-measurements}}
 
-[State the constraints and why they mattered. Include units and identify the source of each number.]
+## Getting the deck through the opening
 
-## Design and tradeoffs
+My first outline followed the trunk walls, including the wide pockets on either side. Those pockets were near my feet, where the extra width did little for me. The tabs also meant more cuts in the plywood and less clearance when lowering it into the car.
 
-[What alternatives did you compare, what did you choose, and why? Add your own CAD or photo.]
+I removed the tabs from the design and kept the trunk section rectangular. That simplified the cuts I could make at home and left room below the deck for tools, water, and cooking gear. The forward section continued over the folded passenger-side seat.
 
-## Manufacturing and assembly
+::: {.case-pair}
+{{figure:civic-wide-layout}}
 
-[Which parts did you make, how did they fit together, and what did you change?]
+{{figure:civic-passenger-layout}}
+:::
 
-## Testing and validation
+## Modeling the deck and supports
 
-[Describe the setup, acceptance criteria, measurements, and any planned checks.]
+I modeled a quarter-inch plywood deck over three supports. My original parts list came to **$80.70** for the plywood, 2×4 lumber, nails, carpet, a two-inch twin mattress topper, and hinges. That was a materials estimate for the hinged version.
 
-## Outcome and next iteration
+::: {.case-pair}
+{{figure:civic-supports-cad}}
 
-[What did the evidence show? What still needs work? Remove empty sections before publishing.]
+{{figure:civic-assembly-cad}}
+:::
+
+## Revising the passenger-side support
+
+I originally planned to hinge the forward 2×4 legs so they could fold for storage. I set that idea aside and proposed custom 3D-printed slots so the supports could come out individually. My next checks are whether the parts clear the door during setup and how much the deck deflects under load. The work documented here ends with the layout, CAD assembly, and materials estimate.

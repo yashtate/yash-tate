@@ -9,7 +9,7 @@ from urllib.parse import urljoin
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
-ROUTES = ("index.html", "projects.html", "baja.html", "baja-powertrain.html", "resume.html")
+ROUTES = ("index.html", "projects.html", "baja.html", "baja-powertrain.html", "camping-build.html", "material-hybrid.html", "resume.html")
 
 # Read actual rendered colors, including inherited colors and nested surfaces.
 CHECK_COLORS = """() => {
@@ -48,7 +48,7 @@ def check_home(page, base):
         assert page.locator(f"section#{anchor}").count() == 1
     assert page.locator("#about").bounding_box()["y"] < page.locator("#gallery").bounding_box()["y"] < page.locator("#resume").bounding_box()["y"]
     photos = page.locator(".photo-wall .zoom-photo")
-    assert photos.count() == 9
+    assert photos.count() == 12
     photos.first.click()
     assert page.locator("dialog").is_visible()
     page.keyboard.press("ArrowRight")
@@ -89,13 +89,20 @@ def main():
                     assert page.locator('link[rel="stylesheet"]').evaluate("el => el.sheet.cssRules.length > 0")
                     issues = page.evaluate(CHECK_COLORS)
                     assert not issues, (route,width,issues)
+                    if route in ("camping-build.html", "material-hybrid.html"):
+                        photos = page.locator(".case-pair a.zoom-photo")
+                        photos.first.click()
+                        viewer = page.locator("#viewer-image")
+                        assert viewer.get_attribute("src") == urljoin(base, photos.first.get_attribute("href"))
+                        assert viewer.evaluate("async el => { await el.decode(); return el.naturalWidth > 0; }")
+                        page.keyboard.press("Escape")
                     if route == "index.html":
                         check_home(page,base)
                     if route in ("index.html","resume.html"):
                         check_document(page,base)
                 assert not errors, errors
                 page.close()
-                print(f"Passed at {width} × {height}: five pages, text contrast, dark surfaces, gallery, PDF and overflow")
+                print(f"Passed at {width} × {height}: {len(ROUTES)} pages, text contrast, dark surfaces, gallery, PDF and overflow")
             page = browser.new_page(viewport={"width":390,"height":844})
             page.add_init_script("Object.defineProperty(navigator,'pdfViewerEnabled',{get:()=>false})")
             page.goto(base)

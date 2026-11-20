@@ -84,5 +84,103 @@
     "height": 853,
     "alt": "Race marshals gathered beside the circuit in white uniforms.",
     "caption": "Race marshals together at the circuit."
+  },
+  "civic-deck-layout": {
+    "file": "assets/civic-deck-layout.webp",
+    "width": 1240,
+    "height": 698,
+    "alt": "The Civic’s open trunk with the revised rectangular deck sketched over the cargo floor in blue.",
+    "caption": "Revised layout. The deck follows a straight path through the trunk opening."
+  },
+  "civic-trunk-measurements": {
+    "file": "assets/civic-trunk-measurements.webp",
+    "width": 679,
+    "height": 381,
+    "alt": "Trunk photo with a 40-inch width in red, a 36-inch depth in blue, and a 2.25-inch vertical measurement in green.",
+    "caption": "Measurements taken inside my Civic with the rear seats folded."
+  },
+  "civic-wide-layout": {
+    "file": "assets/civic-wide-layout.webp",
+    "width": 1240,
+    "height": 698,
+    "alt": "The first deck outline widens into the pockets on both sides of the trunk.",
+    "caption": "First layout. The side tabs used more of the trunk width but complicated installation."
+  },
+  "civic-passenger-layout": {
+    "file": "assets/civic-passenger-layout.webp",
+    "width": 697,
+    "height": 1240,
+    "alt": "Side view of the folded rear seat with the extension and its proposed support legs drawn in blue.",
+    "caption": "Side-door sketch showing where the deck extends beyond the folded seat."
+  },
+  "civic-supports-cad": {
+    "file": "assets/civic-supports-cad.webp",
+    "width": 1050,
+    "height": 519,
+    "alt": "Three parallel wooden supports modeled in CAD.",
+    "caption": "Three support members beneath the trunk deck."
+  },
+  "civic-assembly-cad": {
+    "file": "assets/civic-assembly-cad.webp",
+    "width": 1050,
+    "height": 527,
+    "alt": "CAD view of the plywood sleeping deck resting on its supports.",
+    "caption": "CAD assembly of the trunk section with the plywood deck in place."
+  },
+  "mhm-electrode-batch": {
+    "file": "assets/mhm-electrode-batch.webp",
+    "width": 1200,
+    "height": 1180,
+    "alt": "Sixteen dark printed electrode profiles in a four-by-four array on a sheet of foil.",
+    "caption": "A production sheet of 16 electrode prints. Each profile leaves a square opening through the center."
+  },
+  "mhm-printer": {
+    "file": "assets/mhm-printer.webp",
+    "width": 965,
+    "height": 1030,
+    "alt": "The enclosed printer with a sheet of electrode patterns on the machine bed.",
+    "caption": "The printer and its work area during an electrode run."
+  },
+  "mhm-electrode-samples": {
+    "file": "assets/mhm-electrode-samples.webp",
+    "width": 1120,
+    "height": 568,
+    "alt": "Four labeled electrode samples on a sheet of foil.",
+    "caption": "Samples from two labeled print runs show the electrode geometry before assembly."
+  },
+  "mhm-separator-batch": {
+    "file": "assets/mhm-separator-batch.webp",
+    "width": 657,
+    "height": 1100,
+    "alt": "Rows of cut translucent separator material with square windows and side notches.",
+    "caption": "Separator material after cutting, with repeated windows and notched edges."
+  },
+  "mhm-separator-profile": {
+    "file": "assets/mhm-separator-profile.webp",
+    "width": 1000,
+    "height": 981,
+    "alt": "One white separator with a square window and two curved side notches.",
+    "caption": "A single separator I cut to follow the electrode profile."
+  },
+  "mhm-foil-profile": {
+    "file": "assets/mhm-foil-profile.webp",
+    "width": 800,
+    "height": 773,
+    "alt": "A thin silver-colored cutout with a square opening and a notch on each side.",
+    "caption": "The center opening and side notches are visible on this cutout."
+  },
+  "mhm-separator-detail": {
+    "file": "assets/mhm-separator-detail.webp",
+    "width": 878,
+    "height": 900,
+    "alt": "White separator material placed over a metal layer, with metal visible through its center window.",
+    "caption": "A close view of how the separator sits against the adjacent layer."
+  },
+  "mhm-pouch-cell": {
+    "file": "assets/mhm-pouch-cell.webp",
+    "width": 789,
+    "height": 1060,
+    "alt": "A silver conformal pouch cell with a square center feature and two metal tabs.",
+    "caption": "An assembled conformal cell with both terminal tabs visible."
   }
 }

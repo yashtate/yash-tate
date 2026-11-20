@@ -63,7 +63,7 @@ def card(project):
     photo = ""
     if project["hero"]:
         photo = f'<a class="project-photo" href="{slug}.html" aria-label="Read {escape(project["title"])}">{img(project["hero"])}</a>'
-    return (f'<article class="project-card">{photo}<div class="card-copy"><div class="project-meta">'
+    return (f'<article class="project-card" id="{slug}">{photo}<div class="card-copy"><div class="project-meta">'
             f'<span class="meta">{escape(project["category"])}</span>{status(project)}</div>'
             f'<h3><a href="{slug}.html">{escape(project["title"])}</a></h3>'
             f'<p>{escape(project["problem"])}</p><p>{escape(project["summary"])}</p>'
@@ -113,7 +113,8 @@ def home(featured):
         links.append(f'<a href="mailto:{email}">{email}</a>')
     if p.get("linkedin"):
         links.append(f'<a href="{escape(p["linkedin"])}">LinkedIn</a>')
-    photos = ("car","hill","column","firewall","marshals","rack-front","rear","side","rack-side")
+    photos = ("car","hill","column","firewall","marshals","rack-front","rear","side","rack-side",
+              "mhm-electrode-batch","mhm-pouch-cell","civic-deck-layout")
     gallery = "".join(figure(key, sizes="(max-width: 640px) 50vw, (max-width: 1200px) 38vw, 460px") for key in photos)
     body = tpl("home", **{k:escape(p[k]) for k in ("name","role","team","education","intro","discipline","graduation")},
                resumeButton=pdf, skills=skills, insetPhoto=img("car","(max-width: 700px) 38vw, 16vw"),
@@ -139,10 +140,10 @@ def project_index(projects):
     drafts = (f'<section class="forthcoming"><p class="eyebrow">More projects</p><h2>Case studies in preparation</h2>'
               f'<ul class="project-rows">{in_progress}</ul></section>') if in_progress else ""
     body = ('<section class="page-intro"><div class="wrap"><p class="eyebrow line">Engineering portfolio</p>'
-            '<h1>Engineering projects</h1><p>Design decisions, shop work, and results from the vehicles I’ve worked on.</p></div></section>'
+            '<h1>Engineering projects</h1><p>How I packaged an off-road drivetrain, designed a sleeping platform for my Civic, and helped manufacture conformal batteries.</p></div></section>'
             f'<div class="surface"><div class="wrap index-list">{studies}{drafts}</div></div>')
     layout("projects.html", "Engineering Projects | " + PROFILE["name"],
-           "Case studies in Baja SAE powertrain design, drivetrain packaging, assembly, and endurance testing.",body,"Projects")
+           "Engineering case studies in Baja SAE powertrain design, conformal battery manufacturing, and a removable Honda Civic sleeping platform.",body,"Projects")
     for p in projects:
         if p["draft"] and (p["slug"] in LEGACY or (ROOT / (p["slug"] + ".html")).exists()):
             redirect(p["slug"] + ".html", f'projects.html#{p["slug"]}', p["title"] + " | Projects")
