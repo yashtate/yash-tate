@@ -1,4 +1,116 @@
 {
+  "home-aiaa-portrait": {
+    "file": "assets/home-aiaa-portrait.webp",
+    "width": 1350,
+    "height": 1800,
+    "alt": "Yash giving the Hook ’em Horns sign at AIAA SciTech.",
+    "caption": "AIAA SciTech.",
+    "small": "assets/home-aiaa-portrait-720.webp"
+  },
+  "home-motogp-crew": {
+    "file": "assets/home-motogp-crew.webp",
+    "width": 1440,
+    "height": 1080,
+    "alt": "MotoGP track and medical crew gathered beside the race circuit.",
+    "caption": "With the MotoGP crew at Circuit of The Americas.",
+    "small": "assets/home-motogp-crew-720.webp"
+  },
+  "home-nascar-paddock": {
+    "file": "assets/home-nascar-paddock.webp",
+    "width": 1012,
+    "height": 1800,
+    "alt": "Yash in ear protection beside the No. 35 Toyota stock car.",
+    "caption": "A NASCAR race weekend in the paddock.",
+    "small": "assets/home-nascar-paddock-720.webp"
+  },
+  "home-aviation-exhibit": {
+    "file": "assets/home-aviation-exhibit.webp",
+    "width": 1350,
+    "height": 1800,
+    "alt": "Yash looking up at a propeller aircraft suspended in a museum.",
+    "caption": "Exploring an aviation exhibit.",
+    "small": "assets/home-aviation-exhibit-720.webp"
+  },
+  "home-texas-game-day": {
+    "file": "assets/home-texas-game-day.webp",
+    "width": 1350,
+    "height": 1800,
+    "alt": "Yash and friends in Texas gear at a football game.",
+    "caption": "Texas game day with friends.",
+    "small": "assets/home-texas-game-day-720.webp"
+  },
+  "home-bmw-m3": {
+    "file": "assets/home-bmw-m3.webp",
+    "width": 1179,
+    "height": 1202,
+    "alt": "Yash beside a red BMW M3 at an automotive exhibit.",
+    "caption": "A closer look at a classic BMW M3.",
+    "small": "assets/home-bmw-m3-720.webp"
+  },
+  "home-mountain-lake": {
+    "file": "assets/home-mountain-lake.webp",
+    "width": 1179,
+    "height": 1559,
+    "alt": "Yash beside a lake with sailboats and mountains in the background.",
+    "caption": "A lakeside stop on my travels.",
+    "small": "assets/home-mountain-lake-720.webp"
+  },
+  "home-motogp-trackside": {
+    "file": "assets/home-motogp-trackside.webp",
+    "width": 1013,
+    "height": 1800,
+    "alt": "Yash wearing a headset and an orange MotoGP marshal bib beside the track.",
+    "caption": "Marshaling trackside at MotoGP.",
+    "small": "assets/home-motogp-trackside-720.webp"
+  },
+  "home-bmw-race-car": {
+    "file": "assets/home-bmw-race-car.webp",
+    "width": 1440,
+    "height": 1432,
+    "alt": "Yash next to a blue BMW race car with Red Bull livery.",
+    "caption": "BMW motorsport history up close.",
+    "small": "assets/home-bmw-race-car-720.webp"
+  },
+  "home-el-yunque": {
+    "file": "assets/home-el-yunque.webp",
+    "width": 1012,
+    "height": 1800,
+    "alt": "Yash leaning over the El Yunque National Forest entrance sign.",
+    "caption": "El Yunque National Forest, Puerto Rico.",
+    "small": "assets/home-el-yunque-720.webp"
+  },
+  "home-night-with-friends": {
+    "file": "assets/home-night-with-friends.webp",
+    "width": 1012,
+    "height": 1800,
+    "alt": "A group of friends posing for a nighttime street selfie.",
+    "caption": "A night out with friends.",
+    "small": "assets/home-night-with-friends-720.webp"
+  },
+  "home-fountain-plaza": {
+    "file": "assets/home-fountain-plaza.webp",
+    "width": 1179,
+    "height": 1311,
+    "alt": "Yash standing by a fountain in front of an ornate stone building.",
+    "caption": "A fountain plaza on my travels.",
+    "small": "assets/home-fountain-plaza-720.webp"
+  },
+  "home-forest-overlook": {
+    "file": "assets/home-forest-overlook.webp",
+    "width": 1116,
+    "height": 1800,
+    "alt": "Yash looking out over forested hills under a cloudy sky.",
+    "caption": "Taking in the view above the forest.",
+    "small": "assets/home-forest-overlook-720.webp"
+  },
+  "home-aircraft-museum": {
+    "file": "assets/home-aircraft-museum.webp",
+    "width": 1440,
+    "height": 1080,
+    "alt": "Yash with two companions in a museum hall filled with aircraft.",
+    "caption": "Visiting an aircraft museum together.",
+    "small": "assets/home-aircraft-museum-720.webp"
+  },
   "sidi-heated-bed-assembly": {
     "file": "assets/sidi-heated-bed-assembly.webp",
     "width": 617,

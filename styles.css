@@ -65,7 +65,7 @@ h3 { font-size: clamp(1.2rem,2.25vw,2rem); font-weight: 660; }
 .button.outline,.compact-links a { background:var(--canvas);border:1px solid #757879; }
 .button.outline:hover,.compact-links a:hover,.primary-nav .nav-resume:hover { border-color:var(--accent);color:var(--text);background:#38302b; }
 .portrait { justify-self:end;width:min(100%,25.5rem);border:1px solid #666668;background:#303133; }
-.portrait img { width:100%;height:clamp(21rem,29vw,27rem);object-fit:cover;object-position:50% 28%; }
+.portrait img { width:100%;height:clamp(21rem,29vw,27rem);object-fit:cover;object-position:50% 40%; }
 .skills { background:#1d1e20;border-block:1px solid #393b3c; }
 .skills-inner { display:flex;align-items:center;gap:1.1rem;padding-block:.82rem; }
 .skill-window { flex:1;min-width:0; }
@@ -87,8 +87,7 @@ h3 { font-size: clamp(1.2rem,2.25vw,2rem); font-weight: 660; }
 }
 .section-rule { margin:0 0 1.7rem;padding-bottom:.55rem;border-bottom:1px solid var(--line);color:var(--soft); }
 .about-section { padding-top:clamp(2.5rem,4.5vw,4.25rem); }
-.about-grid { display:grid;grid-template-columns:clamp(10.5rem,18vw,14rem) minmax(0,1fr);gap:clamp(1.4rem,3.2vw,3rem);align-items:start; }
-.about-photo { width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;object-position:50% 43%;border:1px solid #737576;padding:3px;background:#343536; }
+.about-grid { display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);gap:clamp(1.4rem,3.2vw,3rem);align-items:start; }
 .about-copy { max-width:46rem; }
 .about-copy h3,.resume-page h1 { font-size:clamp(2.15rem,4vw,3.3rem);line-height:1.05;letter-spacing:-.05em; }
 .about-meta,.document-meta { color:var(--soft);font-weight:520;margin-top:.55rem; }
@@ -100,8 +99,9 @@ h3 { font-size: clamp(1.2rem,2.25vw,2rem); font-weight: 660; }
 .home-gallery { padding-top:clamp(2rem,3.3vw,3.1rem); }
 .home-gallery h2 { font-size:clamp(1.8rem,3vw,2.75rem); }
 .home-gallery h2::after { content:"";display:block;width:2.25rem;height:2px;background:#bb6a3d;margin-top:.65rem; }
-.photo-wall { width:min(100%,52rem);margin-top:1.25rem; }
-.photo-wall .zoom-photo { overflow:hidden; }
+.photo-wall { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.85rem,2vw,1.5rem);margin-top:1.25rem; }
+.photo-wall .zoom-photo { aspect-ratio:1;overflow:hidden; }
+.photo-wall .zoom-photo img { height:100%;object-fit:cover;object-position:center 45%; }
 .gallery-links { margin-top:1rem;gap:.55rem 1.65rem; }
 .text-link,.contact-links a,.colophon a,.crumb { font-size:.95rem;font-weight:550;text-decoration:underline;text-underline-offset:.32em;text-decoration-color:#a66d50; }
 .home-resume { padding-block:clamp(3rem,5.3vw,5rem); }
@@ -220,17 +220,15 @@ dialog::backdrop { background:#08090ae6; }
   .hero-copy h1 { font-size:clamp(5.2rem,21vw,7.8rem); }
   .hero-role { font-size:clamp(1.25rem,5.3vw,1.7rem); }
   .portrait { justify-self:center;width:min(100%,28rem); }
-  .portrait img { height:clamp(15rem,60vw,21rem);object-position:50% 24%; }
+  .portrait img { height:clamp(17rem,78vw,23rem); }
   .skill-track li::after { margin-inline:1rem; }
-  .about-grid { grid-template-columns:clamp(5.5rem,23vw,9rem) minmax(0,1fr);gap:.6rem 1.1rem; }
-  .about-photo { grid-column:1;grid-row:1/4; }
-  .about-copy { display:contents; }
-  .about-copy h3,.about-copy .about-meta,.about-copy .compact-links { grid-column:2; }
-  .about-copy h3 { align-self:end;font-size:clamp(1.8rem,7.5vw,2.4rem); }
-  .about-meta { margin:0;font-size:.9rem; }
-  .compact-links { margin:0;gap:.35rem; }
+  .about-grid { grid-template-columns:minmax(0,1fr);gap:1.3rem; }
+  .photo-wall { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .about-copy h3 { font-size:clamp(1.8rem,7.5vw,2.4rem); }
+  .about-meta { margin-top:.4rem;font-size:.9rem; }
+  .compact-links { margin:.7rem 0;gap:.35rem; }
   .compact-links a { min-height:2.1rem;font-size:.81rem;padding:.25rem .47rem;overflow-wrap:anywhere; }
-  .about-copy p:not(.about-meta) { grid-column:1/-1;margin-top:.32rem; }
+  .about-copy p:not(.about-meta) { margin-top:.65rem; }
   .about-copy .compact-links + p { margin-top:.8rem; }
   .gallery-links { gap:.5rem 1rem; }
   .document-actions { align-items:flex-start; }

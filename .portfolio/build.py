@@ -120,12 +120,20 @@ def home():
         links.append(f'<a href="mailto:{email}">{email}</a>')
     if p.get("linkedin"):
         links.append(f'<a href="{escape(p["linkedin"])}">LinkedIn</a>')
-    gallery = figure("marshals")
+    photos = (
+        "nascar-paddock", "aviation-exhibit", "texas-game-day",
+        "bmw-m3", "mountain-lake", "motogp-trackside",
+        "bmw-race-car", "el-yunque", "night-with-friends",
+        "fountain-plaza", "forest-overlook", "aircraft-museum",
+    )
+    gallery = "".join(figure(f"home-{photo}", sizes="(max-width: 640px) 46vw, 32vw") for photo in photos)
     body = tpl("home", **{k:escape(p[k]) for k in ("name","role","team","education","intro","discipline","graduation")},
                resumeButton=pdf, skills=skills, profileLinks="".join(links),
+               portraitPhoto=img("home-aiaa-portrait", "(max-width: 640px) 92vw, 408px", eager=True),
+               aboutPhoto=figure("home-motogp-crew", sizes="(max-width: 640px) 92vw, 32vw"),
                galleryPhotos=gallery, resumeSection=section)
     layout("index.html", f'{p["name"]} | {p["role"]} · Mechanical Engineering',
-           f'{p["name"]}, {p["role"]} at {p["team"]}. Explore my Baja SAE powertrain design and testing at UT Austin.', body, media="marshals", lightbox=True)
+           f'{p["name"]}, {p["role"]} at {p["team"]}. Explore my Baja SAE powertrain design and testing at UT Austin.', body, media="home-aiaa-portrait", lightbox=True)
 
 def redirect(filename, target, title):
     url = escape(target)

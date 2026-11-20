@@ -29,7 +29,7 @@ The command writes HTML and the sitemap into the repository root. Commit both yo
 
 Set `SITE_URL` when building for a different public address. For example, `SITE_URL=https://example.com/ python3 .portfolio/build.py` updates canonical links, share URLs, and the sitemap together. Page and asset links stay relative for GitHub project Pages.
 
-The homepage pairs the supplied portrait with a personal photo from a race weekend. Edit the profile in `.portfolio/templates/home.html`, the homepage photo in `home()`, and the shared captions in `.portfolio/media.json`. The résumé viewer embeds the actual PDF. After replacing it, regenerate its first-page backup at 144 dpi with `pdftoppm -f 1 -l 1 -r 144 -singlefile -png Yash-Tate-Resume.pdf /tmp/yash-resume` and `cwebp -lossless /tmp/yash-resume.png -o assets/resume-page.webp`. Rebuild after editing styles or scripts so the pages reference the new asset versions.
+The homepage features the supplied AIAA portrait, a MotoGP crew photo, and a personal gallery. Edit the profile in `.portfolio/templates/home.html`, the gallery order in `home()`, and the shared captions in `.portfolio/media.json`. The résumé viewer embeds the actual PDF. After replacing it, regenerate its first-page backup at 144 dpi with `pdftoppm -f 1 -l 1 -r 144 -singlefile -png Yash-Tate-Resume.pdf /tmp/yash-resume` and `cwebp -lossless /tmp/yash-resume.png -o assets/resume-page.webp`. Rebuild after editing styles or scripts so the pages reference the new asset versions.
 
 ## Fill in another project
 
@@ -46,4 +46,4 @@ The index lists draft titles under **Case studies in preparation**. The draft te
 - **RLL** — The current entry covers the incoming May–August 2027 appointment and anticipated scope from the supplied résumé. Update the status and add approved accomplishments after the work takes place.
 - **Optional technical detail** — The powertrain page distinguishes simulated results and test observations. If you want to publish more detail, supply the load case, baseline mass, or temperature measurements that support it.
 
-The portrait and CAD come from the original portfolio. The Baja gallery uses the supplied team photos. The dark workshop background is decorative artwork.
+The CAD comes from the original portfolio. The Baja gallery uses the supplied team photos. The dark workshop background is decorative artwork.
