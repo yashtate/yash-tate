@@ -89,7 +89,7 @@ def main():
                     assert page.locator('link[rel="stylesheet"]').evaluate("el => el.sheet.cssRules.length > 0")
                     issues = page.evaluate(CHECK_COLORS)
                     assert not issues, (route,width,issues)
-                    if route in ("camping-build.html", "material-hybrid.html"):
+                    if route in ("camping-build.html", "material-hybrid.html", "combat-robot.html"):
                         photos = page.locator(".case-pair a.zoom-photo")
                         photos.first.click()
                         viewer = page.locator("#viewer-image")

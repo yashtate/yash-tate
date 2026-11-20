@@ -181,6 +181,7 @@ h3 { font-size: clamp(1.2rem,2.25vw,2rem); font-weight: 660; }
 .case-meta { margin-top:1.3rem;color:var(--soft); }
 .case-hero-img { padding-top:2rem; }
 .case-hero-img img { max-height:32rem;object-fit:cover;object-position:center 55%; }
+.combat-robot .case-hero-img img,#combat-robot .project-photo img { object-fit:contain;object-position:center; }
 .case-body { display:grid;grid-template-columns:minmax(10rem,.5fr) minmax(0,1.5fr);gap:clamp(2rem,6vw,5rem);padding-block:clamp(2.75rem,5vw,4rem); }
 .contents { align-self:start;position:sticky;top:1rem;border-top:2px solid #99603f;padding-top:.72rem; }
 .contents a { display:block;border-bottom:1px solid var(--line);padding:.6rem 0;text-decoration:none;font-size:.94rem; }

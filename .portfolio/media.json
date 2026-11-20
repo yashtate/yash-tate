@@ -1,4 +1,25 @@
 {
+  "combat-robot-build": {
+    "file": "assets/combat-robot-build.webp",
+    "width": 866,
+    "height": 850,
+    "alt": "Overhead workbench photo of the assembled robot with a scuffed metal top plate and front spinner.",
+    "caption": "The assembled robot on the workbench. The front spinner sits in the opening in the metal top plate."
+  },
+  "combat-robot-cad-top": {
+    "file": "assets/combat-robot-cad-top.webp",
+    "width": 719,
+    "height": 520,
+    "alt": "Onshape assembly viewed from above, showing the top plate, chassis, and front-mounted vertical spinner.",
+    "caption": "Onshape top view. The top plate wraps around the opening for the front spinner."
+  },
+  "combat-robot-cad-underside": {
+    "file": "assets/combat-robot-cad-underside.webp",
+    "width": 720,
+    "height": 499,
+    "alt": "Onshape assembly viewed from below, with two drive wheels visible through the bottom of the chassis.",
+    "caption": "Onshape underside view. The two drive wheels sit inside the chassis footprint."
+  },
   "car": {
     "file": "assets/car-1440.webp",
     "width": 1440,
