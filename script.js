@@ -127,7 +127,7 @@ if (halo) {
 
 // A few mobile browsers download an embedded PDF instead of displaying it.
 if (navigator.pdfViewerEnabled === false) {
-  document.querySelectorAll(".resume-document").forEach(embed => {
+  document.querySelectorAll(".document-frame object[type='application/pdf']").forEach(embed => {
     const preview = embed.querySelector(".document-fallback");
     if (preview) embed.replaceWith(preview);
   });

@@ -64,6 +64,27 @@
     "alt": "CAD assembly of the rear chassis, drivetrain, and wheel.",
     "caption": "Vehicle assembly in CAD. The rear frame defines the available envelope for the CVT and drive components."
   },
+  "baja-vehicle-cad": {
+    "file": "assets/baja-vehicle-side-cad.webp",
+    "width": 881,
+    "height": 600,
+    "alt": "Side-view CAD of car 185 showing the driver cage, rear engine, and suspension.",
+    "caption": "Full-vehicle CAD from the design paper. The engine and CVT sit behind the driver inside the rear frame."
+  },
+  "baja-spaceframe": {
+    "file": "assets/baja-spaceframe-cad.webp",
+    "width": 1146,
+    "height": 1086,
+    "alt": "Isometric CAD of the bare tubular spaceframe for car 185.",
+    "caption": "The spaceframe locates the suspension pickups, driver seat, steering rack, and engine mounts."
+  },
+  "baja-rear-suspension": {
+    "file": "assets/baja-rear-suspension-cad.webp",
+    "width": 865,
+    "height": 566,
+    "alt": "Rear suspension CAD showing the trailing arms, shocks, differential, and CV axles.",
+    "caption": "The rear CV axle doubles as a lower locating link in the semi-trailing-arm layout."
+  },
   "ratios": {
     "file": "baja-cad-1.png",
     "width": 837,

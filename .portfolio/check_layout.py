@@ -64,7 +64,7 @@ def check_document(page, base):
     assert response.ok and response.headers["content-type"].startswith("application/pdf")
     assert response.body().startswith(b"%PDF-")
     if page.evaluate("navigator.pdfViewerEnabled"):
-        embed = page.locator("object.resume-document")
+        embed = page.locator('.document-frame > object[type="application/pdf"]')
         assert embed.is_visible() and embed.bounding_box()["height"] > 300
         assert urljoin(base, embed.get_attribute("data")).split("#")[0] == file_url
     else:
@@ -98,17 +98,18 @@ def main():
                         page.keyboard.press("Escape")
                     if route == "index.html":
                         check_home(page,base)
-                    if route in ("index.html","resume.html"):
+                    if route in ("index.html", "baja-powertrain.html", "resume.html"):
                         check_document(page,base)
                 assert not errors, errors
                 page.close()
                 print(f"Passed at {width} × {height}: {len(ROUTES)} pages, text contrast, dark surfaces, gallery, PDF and overflow")
             page = browser.new_page(viewport={"width":390,"height":844})
             page.add_init_script("Object.defineProperty(navigator,'pdfViewerEnabled',{get:()=>false})")
-            page.goto(base)
-            fallback = page.locator(".document-frame > .document-fallback img")
-            fallback.scroll_into_view_if_needed()
-            assert fallback.evaluate("async el => { await el.decode(); return el.naturalWidth > 0; }")
+            for route in ("index.html", "baja-powertrain.html#research-paper"):
+                page.goto(urljoin(base, route))
+                fallback = page.locator(".document-frame > .document-fallback img")
+                fallback.scroll_into_view_if_needed()
+                assert fallback.evaluate("async el => { await el.decode(); return el.naturalWidth > 0; }")
             browser.close()
     finally:
         server.shutdown()

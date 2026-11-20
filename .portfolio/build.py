@@ -174,7 +174,7 @@ def baja():
                shopPhotos="".join(figure(k) for k in ("column","rack-side","rack-front")),
                fieldPhotos="".join(figure(k) for k in ("hill","firewall","side","rear")))
     layout("baja.html","Longhorn Baja Racing | "+PROFILE["name"],
-           "I co-founded Longhorn Baja Racing at UT Austin and led powertrain for car 185. See the team’s shop photos, competition car, and the combined powertrain and gearbox case study.",
+           "I co-founded Longhorn Baja Racing at UT Austin and led powertrain for car 185. See the team’s shop photos, competition car, and the car 185 engineering case study and design paper.",
            body,"Baja SAE",media="car",lightbox=True)
 
 def resume_embed():
