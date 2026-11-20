@@ -62,6 +62,14 @@ def check_home(page, base):
     assert not page.locator("dialog").is_visible()
     assert photos.first.evaluate("(el) => el === document.activeElement")
 
+    page.goto(urljoin(base, "projects.html"))
+    page.locator(".brand").click()
+    assert page.url == urljoin(base, "#top")
+    page.wait_for_function("window.scrollY === 0")
+    assert page.locator(".portrait img").evaluate(
+        "async img => { await img.decode(); return img.getBoundingClientRect().top < innerHeight; }"
+    )
+
 def check_document(page, base):
     download = page.locator(".document-actions a[download]")
     file_url = urljoin(base, download.get_attribute("href"))
