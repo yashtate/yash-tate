@@ -1,6 +1,6 @@
 # Yash Tate’s engineering portfolio
 
-Static HTML, CSS, and JavaScript for [the portfolio](https://yashtate.github.io/yash-tate/). The homepage, projects index, Baja team page, résumé, and published case studies work with JavaScript disabled. JavaScript adds the skills animation control, section entrances, a desktop cursor highlight, and an image viewer. Motion follows the visitor’s reduced-motion setting.
+Static HTML, CSS, and JavaScript for [the portfolio](https://yashtate.github.io/yash-tate/). The homepage, projects index, Baja team page, embedded résumé, and published case studies work with JavaScript disabled. JavaScript adds the skills animation control, section entrances, a desktop cursor highlight, and an image viewer. Motion follows the visitor’s reduced-motion setting.
 
 ## Preview and build
 
@@ -21,13 +21,15 @@ The command writes HTML and the sitemap into the repository root. Commit both yo
 | Name, incoming RLL role, dates, education, contact links, skills and production URL | `.portfolio/profile.json` |
 | Photos, alt text, native dimensions, responsive variants and captions | `.portfolio/media.json` and `assets/` |
 | Portrait | `assets/yash-tate.webp`, cropped from the existing `hero-yash-tate.jpeg` |
-| Résumé web view | `.portfolio/templates/resume.html` |
-| Résumé download | `Yash-Tate-Resume.pdf` |
+| Résumé viewer on the homepage and résumé page | `.portfolio/templates/resume-embed.html` |
+| Résumé document and single-page preview | `Yash-Tate-Resume.pdf` and `assets/resume-page.webp` |
 | Homepage, team story, shared navigation and footer | `.portfolio/templates/`; navigation links are generated in `.portfolio/build.py` |
 | Combined Baja SAE powertrain and gearbox case study and other project placeholders | `.portfolio/projects/*.md` |
 | Shared layout and interactions | `styles.css`, `script.js` |
 
 Set `SITE_URL` when building for a different public address. For example, `SITE_URL=https://example.com/ python3 .portfolio/build.py` updates canonical links, share URLs, and the sitemap together. Page and asset links stay relative for GitHub project Pages.
+
+The homepage uses the supplied portrait and team photographs. Edit the profile in `.portfolio/templates/home.html`, the gallery order in `home()`, and the shared captions in `.portfolio/media.json`. The résumé viewer embeds the actual PDF. After replacing it, regenerate its first-page backup at 144 dpi with `pdftoppm -f 1 -l 1 -r 144 -singlefile -png Yash-Tate-Resume.pdf /tmp/yash-resume` and `cwebp -lossless /tmp/yash-resume.png -o assets/resume-page.webp`. Rebuild after editing styles or scripts so the pages reference the new asset versions.
 
 ## Fill in another project
 

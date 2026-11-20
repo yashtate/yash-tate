@@ -4,7 +4,7 @@
       <p class="eyebrow line">$discipline</p>
       <h1>$name</h1>
       <p class="hero-role"><strong>$role</strong> <span>at $team</span></p>
-      <p class="education" id="about">$education</p>
+      <p class="education">$education</p>
       <p class="hero-intro">$intro</p>
       <div class="actions"><a class="button primary" href="projects.html">View Engineering Projects</a>$resumeButton</div>
     </div>
@@ -18,17 +18,28 @@
   <div class="wrap skills-inner"><button class="motion" type="button" hidden aria-pressed="false"><span class="pause-icon" aria-hidden="true"></span><span class="motion-word">Pause</span><span class="sr-only"> skill animation</span></button>
   <div class="skill-window"><div class="skill-track"><ul>$skills</ul><ul class="skill-copy" aria-hidden="true">$skills</ul></div></div></div>
 </section>
-<div class="surface">
-  <section id="work" class="wrap featured-section">
-    <div class="section-title"><h2>Featured project</h2><a class="text-link" href="projects.html">All projects</a></div>
-    $featured
-  </section>
+<div class="home-editorial">
+  <div class="wrap">
+    <section id="about" class="about-section" aria-labelledby="about-label">
+      <h2 id="about-label" class="section-rule">About</h2>
+      <div class="about-grid">
+        <img class="about-photo" src="hero-yash-tate.jpeg" width="800" height="1067" alt="Yash Tate at the McCombs School of Business in Austin" loading="lazy">
+        <div class="about-copy">
+          <h3>$name</h3>
+          <p class="about-meta">B.S. Mechanical Engineering · The University of Texas at Austin · $graduation</p>
+          <div class="compact-links">$profileLinks</div>
+          <p>I co-founded Longhorn Baja Racing at UT Austin. As powertrain lead, I’ve worked on everything from choosing gear ratios in SolidWorks to finding out why a drivetrain failed during an endurance run. Right now, I’m designing the gearbox mount for our next layout.</p>
+          <p id="experience">Away from the shop, I volunteer as a race marshal at Circuit of The Americas. In summer 2027, I’ll join Rahal Letterman Lanigan Racing to work on suspension dampers, test procedures, and fixtures.</p>
+        </div>
+      </div>
+      <a class="gallery-jump" href="#gallery">View gallery</a>
+    </section>
+    <section id="gallery" class="home-gallery" aria-labelledby="gallery-title">
+      <h2 id="gallery-title">From the shop to the track</h2>
+      <p>Car 185 in the shop and at Baja SAE Ohio, plus a look trackside with the marshals.</p>
+      <div class="photo-wall">$galleryPhotos</div>
+      <div class="gallery-links" id="work"><a class="text-link" href="$caseUrl">Powertrain &amp; drivetrain case study</a><a class="text-link" href="baja.html">Longhorn Baja Racing</a></div>
+    </section>
+    $resumeSection
+  </div>
 </div>
-<section class="baja-strip" id="gallery"><div class="wrap baja-promo">
-  <div><p class="eyebrow">Baja SAE · UT Austin</p><h2>Longhorn Baja Racing</h2><p>I co-founded the team and lead powertrain. On our first competition car, I coordinated the people designing the drivetrain with the people machining, assembling, and testing it.</p><a class="button outline" href="baja.html">Explore the Baja team</a></div>
-  <a class="promo-img" href="baja.html" aria-label="Explore Longhorn Baja Racing">$bajaPhoto</a>
-</div></section>
-<section class="surface experience" id="experience"><div class="wrap experience-grid">
-  <div><p class="eyebrow">Experience</p><h2>Next season</h2></div>
-  <div><p class="date">$internshipTerm</p><h3>$role</h3><p class="employer">$team</p><p>$internshipScope</p></div>
-</div></section>

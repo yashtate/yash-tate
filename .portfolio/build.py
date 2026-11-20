@@ -1,4 +1,5 @@
 """Render the static GitHub Pages site with Python 3.11+ and Pandoc."""
+from hashlib import sha256
 import json
 import os
 import re
@@ -18,6 +19,10 @@ SITE = os.environ.get("SITE_URL", PROFILE["productionUrl"]).rstrip("/") + "/"
 PAGES = []
 LEGACY = {"material-hybrid", "camping-build", "sidi-lab", "combat-robot"}
 
+def versioned_asset(filename):
+    digest = sha256((ROOT / filename).read_bytes()).hexdigest()[:12]
+    return f"{filename}?v={digest}"
+
 def tpl(template_name, **fields):
     return Template((SOURCE / "templates" / (template_name + ".html")).read_text()).substitute(fields)
 
@@ -30,11 +35,11 @@ def img(key, sizes="(max-width: 700px) 94vw, 48vw", eager=False):
     return (f'<img src="{m["file"]}"{responsive} width="{m["width"]}" height="{m["height"]}" '
             f'alt="{escape(m["alt"])}" {loading} decoding="async">')
 
-def figure(key, caption=None):
+def figure(key, caption=None, sizes="(max-width: 700px) 94vw, 48vw"):
     m = MEDIA[key]
     label = escape(caption or m["caption"])
     return (f'<figure class="gallery-figure"><a class="zoom-photo" href="{m["file"]}" '
-            f'aria-label="Enlarge image. {escape(m["alt"])}">{img(key)}'
+            f'aria-label="Enlarge image. {escape(m["alt"])}">{img(key, sizes)}'
             f'<span class="zoom-icon" aria-hidden="true">+</span></a><figcaption>{label}</figcaption></figure>')
 
 def load_projects():
@@ -65,7 +70,7 @@ def card(project):
             f'<a class="text-link" href="{slug}.html">Read case study</a></div></article>')
 
 def layout(filename, title, description, body, active="", media="car", lightbox=False):
-    nav_items = [("Projects", "projects.html"), ("Baja SAE", "baja.html"), ("Contact", "#contact")]
+    nav_items = [("About", "#about" if filename == "index.html" else "index.html#about"), ("Projects", "projects.html"), ("Baja SAE", "baja.html"), ("Contact", "#contact")]
     nav = "".join(f'<a href="{href}"' + (' aria-current="page"' if name == active else '') + f'>{name}</a>'
                   for name,href in nav_items)
     contact = []
@@ -76,15 +81,18 @@ def layout(filename, title, description, body, active="", media="car", lightbox=
         contact.append(f'<a href="{escape(PROFILE["linkedin"])}">LinkedIn</a>')
     if PROFILE.get("resume"):
         current = ' aria-current="page"' if filename == "resume.html" else ""
-        nav += f'<a class="nav-resume" href="resume.html"{current}>Résumé</a>'
+        resume_url = "#resume" if filename == "index.html" else "resume.html"
+        nav += f'<a class="nav-resume" href="{resume_url}"{current}>Résumé</a>'
         contact.append('<a href="resume.html">Résumé</a>')
     dialog = ""
     if lightbox:
         dialog = ('<dialog id="viewer" aria-labelledby="viewer-caption"><div class="viewer-tools">'
-                  '<button type="button" id="viewer-close" autofocus>Close image</button></div>'
-                  '<img id="viewer-image" alt=""><p id="viewer-caption"></p></dialog>')
+                   '<div class="viewer-nav"><button type="button" id="viewer-prev">Previous</button>'
+                  '<button type="button" id="viewer-next">Next</button></div>'
+                  '<button type="button" id="viewer-close" autofocus>Close image</button></div>' 
+                  '<img id="viewer-image" alt=""><p id="viewer-caption" aria-live="polite"></p></dialog>')
     route = "" if filename == "index.html" else filename
-    page = tpl("base", name=escape(PROFILE["name"]), title=escape(title), description=escape(description),
+    page = tpl("base", cssUrl=versioned_asset("styles.css"), jsUrl=versioned_asset("script.js"), name=escape(PROFILE["name"]), title=escape(title), description=escape(description),
                canonical=escape(urljoin(SITE,route)), socialImage=urljoin(SITE,MEDIA[media]["file"]),
                socialAlt=escape(MEDIA[media]["alt"]), graduation=escape(PROFILE["graduation"]),
                pageClass=filename.split(".")[0], navigation=nav, body=body, dialog=dialog,
@@ -95,20 +103,31 @@ def layout(filename, title, description, body, active="", media="car", lightbox=
 def home(featured):
     p = PROFILE
     skills = "".join(f"<li>{escape(skill)}</li>" for skill in p["skills"])
-    pdf = '<a class="button outline" href="resume.html">View Résumé</a>' if p.get("resume") else '<a class="button outline" href="#contact">Contact</a>'
-    body = tpl("home", **{k:escape(p[k]) for k in ("name","role","team","education","intro","discipline","internshipTerm","internshipScope")},
-               resumeButton=pdf, skills=skills, featured=card(featured), insetPhoto=img("car","(max-width: 700px) 38vw, 16vw"),
-               bajaPhoto=img("side"))
+    has_resume = bool(p.get("resume"))
+    pdf = '<a class="button outline" href="#resume">View Résumé</a>' if has_resume else '<a class="button outline" href="#contact">Contact</a>'
+    section = ('<section id="resume" class="home-resume" aria-labelledby="resume-label">'
+               '<h2 id="resume-label" class="section-rule">Résumé</h2>' + resume_embed() + '</section>') if has_resume else ""
+    links = []
+    if p.get("email"):
+        email = escape(p["email"])
+        links.append(f'<a href="mailto:{email}">{email}</a>')
+    if p.get("linkedin"):
+        links.append(f'<a href="{escape(p["linkedin"])}">LinkedIn</a>')
+    photos = ("car","hill","column","firewall","marshals","rack-front","rear","side","rack-side")
+    gallery = "".join(figure(key, sizes="(max-width: 640px) 50vw, (max-width: 1200px) 38vw, 460px") for key in photos)
+    body = tpl("home", **{k:escape(p[k]) for k in ("name","role","team","education","intro","discipline","graduation")},
+               resumeButton=pdf, skills=skills, insetPhoto=img("car","(max-width: 700px) 38vw, 16vw"),
+               profileLinks="".join(links), galleryPhotos=gallery, caseUrl=escape(featured["slug"] + ".html"), resumeSection=section)
     layout("index.html", f'{p["name"]} | {p["role"]} · Mechanical Engineering',
-           f'{p["name"]}, {p["role"]} at {p["team"]}. Explore my Baja SAE powertrain design and testing at UT Austin.', body)
+           f'{p["name"]}, {p["role"]} at {p["team"]}. Explore my Baja SAE powertrain design and testing at UT Austin.', body, lightbox=True)
 
 def redirect(filename, target, title):
     url = escape(target)
     markup = (
         '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<meta name="color-scheme" content="dark"><meta name="theme-color" content="#0c0a09">'
-        '<style>html,body{background:#0c0a09;color:#e5c6ab}a{color:#f39053}</style>'
-        f'<link rel="stylesheet" href="styles.css"><link rel="canonical" href="{escape(urljoin(SITE, target.split("#")[0]))}">'
+        '<meta name="color-scheme" content="dark"><meta name="theme-color" content="#191a1b">'
+        '<style>html,body{background:#202123;color:#f1f0ec}a{color:#f39053}</style>'
+        f'<link rel="stylesheet" href="{versioned_asset("styles.css")}"><link rel="canonical" href="{escape(urljoin(SITE, target.split("#")[0]))}">'
         f'<meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url={url}"><title>{escape(title)}</title></head>'
         f'<body class="redirect-page"><p><a href="{url}">{escape(title)}</a></p></body></html>')
     (ROOT / filename).write_text(markup)
@@ -157,12 +176,14 @@ def baja():
            "I co-founded Longhorn Baja Racing at UT Austin and led powertrain for car 185. See the team’s shop photos, competition car, and the combined powertrain and gearbox case study.",
            body,"Baja SAE",media="car",lightbox=True)
 
+def resume_embed():
+    return tpl("resume-embed", resume=escape(PROFILE["resume"]), name=escape(PROFILE["name"]), preview="assets/resume-page.webp")
+
 def resume():
     p = PROFILE
-    fields = {key: escape(p[key]) for key in ("name","graduation","team","role","internshipTerm","internshipScope","resume")}
-    body = tpl("resume", **fields, skillList="".join(f"<li>{escape(item)}</li>" for item in p["skills"]))
+    body = tpl("resume", name=escape(p["name"]), graduation=escape(p["graduation"]), embed=resume_embed())
     layout("resume.html", f'{p["name"]} | Mechanical Engineering Résumé',
-           f'Mechanical engineering education and experience at UT Austin, Longhorn Baja Racing, and MATERIAL Hybrid Manufacturing. {p["role"]} at {p["team"]}.', body)
+           f'View or download my résumé. {p["role"]} at {p["team"]}.', body)
 
 def main():
     projects = load_projects()

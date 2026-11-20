@@ -31,6 +31,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Check portfolio layout in Chrome
+        run: |
+          python3 -m venv "$RUNNER_TEMP/portfolio-check"
+          "$RUNNER_TEMP/portfolio-check/bin/pip" install --quiet playwright==1.55.0
+          "$RUNNER_TEMP/portfolio-check/bin/python" .portfolio/check_layout.py
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact

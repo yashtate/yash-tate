@@ -19,17 +19,36 @@ const viewer = document.getElementById("viewer");
 if (viewer && typeof viewer.showModal === "function") {
   const photo = document.getElementById("viewer-image");
   const caption = document.getElementById("viewer-caption");
+  const links = Array.from(document.querySelectorAll(".zoom-photo"));
+  const previous = document.getElementById("viewer-prev");
+  const next = document.getElementById("viewer-next");
+  const openerGroup = previous.parentElement;
+  openerGroup.hidden = links.length < 2;
+  let current = 0;
   let opener = null;
-  document.querySelectorAll(".zoom-photo").forEach(link => {
+  function show(index) {
+    current = (index + links.length) % links.length;
+    const link = links[current];
+    photo.src = link.href;
+    photo.alt = link.querySelector("img").alt;
+    caption.textContent = link.closest("figure").querySelector("figcaption").textContent;
+  }
+  links.forEach((link, index) => {
     link.addEventListener("click", event => {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       opener = link;
-      photo.src = link.href;
-      photo.alt = link.querySelector("img").alt;
-      caption.textContent = link.closest("figure").querySelector("figcaption").textContent;
+      show(index);
       viewer.showModal();
     });
+  });
+  previous.addEventListener("click", () => show(current - 1));
+  next.addEventListener("click", () => show(current + 1));
+  viewer.addEventListener("keydown", event => {
+    if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
+      event.preventDefault();
+      show(current + (event.key === "ArrowRight" ? 1 : -1));
+    }
   });
   document.getElementById("viewer-close").addEventListener("click", () => viewer.close());
   viewer.addEventListener("click", event => {
@@ -54,7 +73,7 @@ if ("IntersectionObserver" in window) {
   const revealSections = () => {
     observer.disconnect();
     if (reducedMotion.matches) return;
-    const selectors = ".section-title, .project-card, .metrics, .case-body h2, .cv section h2, .field-grid figure";
+    const selectors = ".section-title, .project-card, .metrics, .case-body h2, .about-copy h3, .home-gallery h2, .field-grid figure";
     document.querySelectorAll(selectors).forEach(element => {
       if (!element.classList.contains("entered")) observer.observe(element);
     });
@@ -104,4 +123,12 @@ if (halo) {
   }
   configurePointer();
   pointerMode.addEventListener("change", configurePointer);
+}
+
+// A few mobile browsers download an embedded PDF instead of displaying it.
+if (navigator.pdfViewerEnabled === false) {
+  document.querySelectorAll(".resume-document").forEach(embed => {
+    const preview = embed.querySelector(".document-fallback");
+    if (preview) embed.replaceWith(preview);
+  });
 }
