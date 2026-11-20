@@ -9,7 +9,7 @@ from urllib.parse import urljoin
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
-ROUTES = ("index.html", "projects.html", "baja.html", "baja-powertrain.html", "camping-build.html", "material-hybrid.html", "resume.html")
+ROUTES = ("index.html", "projects.html", "baja.html", "baja-powertrain.html", "camping-build.html", "material-hybrid.html", "combat-robot.html", "resume.html")
 
 # Read actual rendered colors, including inherited colors and nested surfaces.
 CHECK_COLORS = """() => {

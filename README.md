@@ -37,11 +37,11 @@ Open a named Markdown draft in `.portfolio/projects/` or copy `_template.md` to 
 
 Use `{{figure:cad}}` on its own line to insert a captioned, expandable figure from the media catalog. To add an image, put the file in `assets/`, add its entry to the catalog, and use the entry key in the Markdown or `hero` field. Set `featured = true` on exactly one published project. Set `draft = false` and rebuild when a case study is ready.
 
-The index lists draft titles under **Case studies in preparation**. The draft text is excluded from the generated pages. The former gearbox page goes to the mount section in the powertrain case study. The Civic and battery URLs open their full case studies. The SiDi lab and combat robot URLs take readers to their draft titles on the Projects page. The source repository itself is public, so keep confidential notes and images outside it.
+The index lists draft titles under **Case studies in preparation**. The draft text is excluded from the generated pages. The former gearbox page goes to the mount section in the powertrain case study. The Civic, battery, and combat robot URLs open their full case studies. The SiDi lab URL takes readers to its draft title on the Projects page. The source repository itself is public, so keep confidential notes and images outside it.
 
 ## Content still to supply
 
-- **Other projects** — The go-kart, SiDi lab, and combat robot have individual draft files. Add your contribution, a cleared photo or CAD view, and the design, fabrication, or test evidence you want recruiters to see.
+- **Other projects** — The go-kart and SiDi lab have individual draft files. Add your contribution, a cleared photo or CAD view, and the design, fabrication, or test evidence you want recruiters to see.
 - **Gearbox mount** — Add mount-specific CAD, the selected mount position and clearance, and fit-up or test results when available. The combined case study’s final section identifies the mount as in design and shows the earlier competition vehicle for context.
 - **RLL** — The current entry covers the incoming May–August 2027 appointment and anticipated scope from the supplied résumé. Update the status and add approved accomplishments after the work takes place.
 - **Optional technical detail** — The powertrain page distinguishes simulated results and test observations. If you want to publish more detail, supply the load case, baseline mass, or temperature measurements that support it.

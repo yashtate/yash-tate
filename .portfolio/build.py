@@ -92,9 +92,16 @@ def layout(filename, title, description, body, active="", media="car", lightbox=
                   '<button type="button" id="viewer-close" autofocus>Close image</button></div>' 
                   '<img id="viewer-image" alt=""><p id="viewer-caption" aria-live="polite"></p></dialog>')
     route = "" if filename == "index.html" else filename
+    social_tags = '  <meta name="twitter:card" content="summary">'
+    if media:
+        image = MEDIA[media]
+        social_tags = (
+            f'  <meta property="og:image" content="{escape(urljoin(SITE, image["file"]))}">\n'
+            f'  <meta property="og:image:alt" content="{escape(image["alt"])}">\n'
+            '  <meta name="twitter:card" content="summary_large_image">'
+        )
     page = tpl("base", cssUrl=versioned_asset("styles.css"), jsUrl=versioned_asset("script.js"), name=escape(PROFILE["name"]), title=escape(title), description=escape(description),
-               canonical=escape(urljoin(SITE,route)), socialImage=urljoin(SITE,MEDIA[media]["file"]),
-               socialAlt=escape(MEDIA[media]["alt"]), graduation=escape(PROFILE["graduation"]),
+               canonical=escape(urljoin(SITE,route)), socialTags=social_tags, graduation=escape(PROFILE["graduation"]),
                pageClass=filename.split(".")[0], navigation=nav, body=body, dialog=dialog,
                contactLinks="".join(contact))
     (ROOT / filename).write_text(page)
@@ -160,14 +167,14 @@ def case_study(p):
         html = subprocess.run(["pandoc","--from=markdown-raw_tex","--to=html5","--wrap=none"],
                               input=body,text=True,capture_output=True,check=True).stdout
         sections.append(f'<section id="{anchor}"><h2>{escape(heading)}</h2>{html}</section>')
-    photo = figure(p["hero"],p["heroCaption"]) if p["hero"] else ""
+    photo = f'<div class="wrap case-hero-img">{figure(p["hero"], p["heroCaption"])}</div>' if p["hero"] else ""
     body = (f'<section class="page-intro case-intro"><div class="wrap"><a class="crumb" href="projects.html">All engineering projects</a>'
             f'<p class="eyebrow line">{escape(p["category"])}</p><h1>{escape(p["title"])}</h1><p>{escape(p["summary"])}</p>'
             f'<div class="case-meta">{status(p)}<span>{escape(p["role"])}</span></div></div></section>'
-            f'<div class="surface"><div class="wrap case-hero-img">{photo}</div><div class="wrap case-body">'
+            f'<div class="surface">{photo}<div class="wrap case-body">'
             f'<nav aria-label="Case study sections" class="contents"><p class="eyebrow">In this study</p>{"".join(menu)}</nav>'
             f'<article>{"".join(sections)}<a class="text-link" href="projects.html">Back to projects</a></article></div></div>')
-    layout(p["slug"]+".html", p["title"]+" | "+PROFILE["name"], p["summary"], body, media=p["hero"] or "car", lightbox=True)
+    layout(p["slug"]+".html", p["title"]+" | "+PROFILE["name"], p["summary"], body, media=p["hero"], lightbox=True)
 
 def baja():
     body = tpl("baja", bajaHeroPhoto=img("car","100vw",True),

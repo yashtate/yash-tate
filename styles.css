@@ -137,6 +137,7 @@ h3 { font-size: clamp(1.2rem,2.25vw,2rem); font-weight: 660; }
 .project-card { display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:clamp(1.5rem,4vw,3.5rem);align-items:center;padding-block:1.5rem;border-block:1px solid var(--line); }
 .project-photo { display:block;overflow:hidden;background:var(--raised); }
 .project-photo img { width:100%;aspect-ratio:1.65;object-fit:cover;object-position:center 56%; }
+.card-copy:only-child { grid-column:1/-1;max-width:68ch; }
 .card-copy h3 { font-size:clamp(1.65rem,3vw,2.65rem);margin:.8rem 0; }
 .card-copy h3 a { text-decoration:none; }
 .card-copy p { margin-top:.55rem; }
