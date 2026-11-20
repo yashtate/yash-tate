@@ -43,6 +43,9 @@ jobs:
         with:
           # Upload entire repository
           path: '.'
+      # Pages can briefly return an empty artifact list immediately after upload.
+      - name: Allow Pages artifact metadata to propagate
+        run: sleep 15
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
