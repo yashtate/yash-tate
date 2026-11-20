@@ -9,7 +9,7 @@ from urllib.parse import urljoin
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parent.parent
-ROUTES = ("index.html", "projects.html", "baja.html", "baja-powertrain.html", "camping-build.html", "material-hybrid.html", "combat-robot.html", "resume.html")
+ROUTES = ("index.html", "projects.html", "baja.html", "baja-powertrain.html", "camping-build.html", "material-hybrid.html", "combat-robot.html", "sidi-lab.html", "resume.html")
 
 # Read actual rendered colors, including inherited colors and nested surfaces.
 CHECK_COLORS = """() => {
@@ -89,7 +89,7 @@ def main():
                     assert page.locator('link[rel="stylesheet"]').evaluate("el => el.sheet.cssRules.length > 0")
                     issues = page.evaluate(CHECK_COLORS)
                     assert not issues, (route,width,issues)
-                    if route in ("camping-build.html", "material-hybrid.html", "combat-robot.html"):
+                    if route in ("camping-build.html", "material-hybrid.html", "combat-robot.html", "sidi-lab.html"):
                         photos = page.locator(".case-pair a.zoom-photo")
                         photos.first.click()
                         viewer = page.locator("#viewer-image")

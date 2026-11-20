@@ -1,4 +1,32 @@
 {
+  "sidi-heated-bed-assembly": {
+    "file": "assets/sidi-heated-bed-assembly.webp",
+    "width": 617,
+    "height": 720,
+    "alt": "CAD model of the heated print bed raised on its scissor linkage, with components beneath it in the base.",
+    "caption": "Full assembly model with the platform raised and base components shown beneath the linkage."
+  },
+  "sidi-lift-linkage": {
+    "file": "assets/sidi-lift-linkage.webp",
+    "width": 561,
+    "height": 750,
+    "alt": "Isometric CAD view showing the heated bed platform, crossed lift arms, and rectangular base frame.",
+    "caption": "Mechanical CAD view showing the crossed links between the print platform and base frame."
+  },
+  "sidi-heater-pcb": {
+    "file": "assets/sidi-heater-pcb.webp",
+    "width": 644,
+    "height": 632,
+    "alt": "Green PCB layout with closely spaced traces covering most of the board.",
+    "caption": "Resistive heater PCB layout, showing traces spread across the board."
+  },
+  "sidi-pcb-layout": {
+    "file": "assets/sidi-pcb-layout.webp",
+    "width": 644,
+    "height": 632,
+    "alt": "PCB layout showing traces, a central component footprint, and test pads along the edges.",
+    "caption": "PCB layout detail showing component connections and test pads."
+  },
   "combat-robot-build": {
     "file": "assets/combat-robot-build.webp",
     "width": 866,
