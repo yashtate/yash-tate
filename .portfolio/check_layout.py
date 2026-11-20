@@ -48,11 +48,12 @@ def check_home(page, base):
         assert page.locator(f"section#{anchor}").count() == 1
     assert page.locator("#about").bounding_box()["y"] < page.locator("#gallery").bounding_box()["y"] < page.locator("#resume").bounding_box()["y"]
     photos = page.locator(".photo-wall .zoom-photo")
-    assert photos.count() == 12
+    assert photos.count() == 1
+    assert photos.first.get_attribute("href") == "baja-role-2.jpeg"
     photos.first.click()
     assert page.locator("dialog").is_visible()
-    page.keyboard.press("ArrowRight")
-    assert page.locator("#viewer-image").get_attribute("src") == urljoin(base, photos.nth(1).get_attribute("href"))
+    assert page.locator("#viewer-image").get_attribute("src") == urljoin(base, photos.first.get_attribute("href"))
+    assert not page.locator("#viewer-next").is_visible()
     page.keyboard.press("Escape")
     assert not page.locator("dialog").is_visible()
     assert photos.first.evaluate("(el) => el === document.activeElement")

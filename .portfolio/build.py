@@ -107,7 +107,7 @@ def layout(filename, title, description, body, active="", media="car", lightbox=
     (ROOT / filename).write_text(page)
     PAGES.append(route)
 
-def home(featured):
+def home():
     p = PROFILE
     skills = "".join(f"<li>{escape(skill)}</li>" for skill in p["skills"])
     has_resume = bool(p.get("resume"))
@@ -120,14 +120,12 @@ def home(featured):
         links.append(f'<a href="mailto:{email}">{email}</a>')
     if p.get("linkedin"):
         links.append(f'<a href="{escape(p["linkedin"])}">LinkedIn</a>')
-    photos = ("car","hill","column","firewall","marshals","rack-front","rear","side","rack-side",
-              "mhm-electrode-batch","mhm-pouch-cell","civic-deck-layout")
-    gallery = "".join(figure(key, sizes="(max-width: 640px) 50vw, (max-width: 1200px) 38vw, 460px") for key in photos)
+    gallery = figure("marshals")
     body = tpl("home", **{k:escape(p[k]) for k in ("name","role","team","education","intro","discipline","graduation")},
-               resumeButton=pdf, skills=skills, insetPhoto=img("car","(max-width: 700px) 38vw, 16vw"),
-               profileLinks="".join(links), galleryPhotos=gallery, caseUrl=escape(featured["slug"] + ".html"), resumeSection=section)
+               resumeButton=pdf, skills=skills, profileLinks="".join(links),
+               galleryPhotos=gallery, resumeSection=section)
     layout("index.html", f'{p["name"]} | {p["role"]} · Mechanical Engineering',
-           f'{p["name"]}, {p["role"]} at {p["team"]}. Explore my Baja SAE powertrain design and testing at UT Austin.', body, lightbox=True)
+           f'{p["name"]}, {p["role"]} at {p["team"]}. Explore my Baja SAE powertrain design and testing at UT Austin.', body, media="marshals", lightbox=True)
 
 def redirect(filename, target, title):
     url = escape(target)
@@ -195,7 +193,7 @@ def resume():
 
 def main():
     projects = load_projects()
-    home(next(p for p in projects if p["featured"] and not p["draft"]))
+    home()
     project_index(projects)
     baja()
     if PROFILE.get("resume"):
